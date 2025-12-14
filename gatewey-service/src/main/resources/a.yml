@@ -1,0 +1,12 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: r1
+          uri: lb://COLIS-SERVICE
+          predicates:
+            Path= /api/colises/**
+        - id: r2
+          uri: lb://LIVRAISON-SERVICE
+          predicates:
+            Path=/track/**
