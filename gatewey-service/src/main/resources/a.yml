@@ -1,12 +1,30 @@
+server:
+  port: 8888
+
 spring:
+  application:
+    name: gatewey-service
+  main:
+    web-application-type: reactive
   cloud:
+    config:
+      enabled: false
+
     gateway:
       routes:
-        - id: r1
-          uri: lb://COLIS-SERVICE
+        - id: colis-service
+          uri: lb://colis-service
           predicates:
-            Path= /api/colises/**
-        - id: r2
-          uri: lb://LIVRAISON-SERVICE
+            - Path=/api/colises/**
+
+        - id: livraison-service
+          uri: lb://livraison-service
           predicates:
-            Path=/track/**
+            - Path=/track/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true

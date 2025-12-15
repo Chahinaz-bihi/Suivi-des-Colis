@@ -1,9 +1,8 @@
-package com.example.livraisonservice.controllers;
+package org.example.livraisonservice.controllers;
 
-import com.example.livraisonservice.entities.TrackingResponse;
-import com.example.livraisonservice.services.TrackingService;
+import org.example.livraisonservice.entities.TrackingResponse;
+import org.example.livraisonservice.services.TrackingService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;

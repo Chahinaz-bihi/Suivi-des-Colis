@@ -1,4 +1,4 @@
-package org.example.livraisonservice.entities;
+package org.example.locationservice.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Location {
-    private double lat;
-    private double lon;
     private String city;
+    private double latitude;
+    private double longitude;
 }
 

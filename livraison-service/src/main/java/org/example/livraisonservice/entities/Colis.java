@@ -1,10 +1,11 @@
-package com.example.livraisonservice.entities;
+package org.example.livraisonservice.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.example.livraisonservice.StatusLivraison;
 
 @Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Colis {
@@ -13,4 +14,5 @@ public class Colis {
     private String expediteur;
     private String destinataire;
     private double poids;
+    private StatusLivraison statut;
 }

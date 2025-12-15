@@ -1,6 +1,6 @@
-package com.example.livraisonservice.entities;
+package org.example.livraisonservice.entities;
 
-import com.example.livraisonservice.StatusLivraison;
+import org.example.livraisonservice.StatusLivraison;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

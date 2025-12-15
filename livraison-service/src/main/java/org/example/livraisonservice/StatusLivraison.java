@@ -1,9 +1,7 @@
-package org.example.colisservice;
+package org.example.livraisonservice;
 
 public enum StatusLivraison {
     PREPARED,
-    SHIPPED,
-    IN_TRANSIT,
     OUT_FOR_DELIVERY,
     DELIVERED
 }

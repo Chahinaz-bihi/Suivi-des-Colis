@@ -1,14 +1,9 @@
-package com.example.colisservice.entities;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
+package org.example.colisservice.entities;
+import jakarta.persistence.*;
+import lombok.*;
+import org.example.livraisonservice.StatusLivraison;
+@Getter
+@Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,7 +14,15 @@ public class Colis {
     private Long id;
 
     private String reference;
-    private String expediteur;
-    private String destinataire;
+
+
+    // Ou si tu veux garder les deux :
+    private String expediteur;       // Ex: "Sara", "Mohammed"
+
+    private String destinataire;     // Ex: "Marrakech", "Fès"
+
     private double poids;
+
+    @Enumerated(EnumType.STRING)
+    private StatusLivraison statut;
 }
