@@ -3,6 +3,8 @@ package org.example.colisservice.service;
 import lombok.RequiredArgsConstructor;
 import org.example.colisservice.entities.Colis;
 import org.example.colisservice.entities.ColisStats;
+import org.example.colisservice.exceptions.ColisAlreadyDeliveredException;
+import org.example.colisservice.exceptions.ColisNotFoundException;
 import org.example.livraisonservice.StatusLivraison;
 import org.example.colisservice.repositories.ColisRepository;
 import org.springframework.stereotype.Service;
@@ -22,7 +24,7 @@ public class ColisService {
 
     public Colis getById(Long id) {
         return colisRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Colis non trouvé avec id " + id));
+                .orElseThrow(() ->new ColisNotFoundException(id));
     }
 
     public Colis create(Colis colis) {
@@ -38,7 +40,7 @@ public class ColisService {
 
         // ❌ Vérification si déjà livré
         if (colis.getStatut() == StatusLivraison.DELIVERED) {
-            throw new RuntimeException("Un colis livré ne peut plus être modifié");
+            throw new ColisAlreadyDeliveredException(id);
         }
 
         // 🔎 ancien statut
