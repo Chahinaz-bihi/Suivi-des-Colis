@@ -147,7 +147,7 @@ public class ColisServiceApplication {
             // Colis 14 - En transit vers Essaouira
             Colis colis14 = Colis.builder()
                     .reference("REF-1014")
-                    .destinataire("Mohamadia")
+                    .destinataire("Oujda")
                     .expediteur("Samira")
                     .statut(StatusLivraison.PREPARED)
                     .poids(2.4)
@@ -167,7 +167,7 @@ public class ColisServiceApplication {
             // Colis 16 - En transit vers Casablanca
             Colis colis16 = Colis.builder()
                     .reference("REF-1016")
-                    .destinataire("Mohamadia")
+                    .destinataire("Kenitra")
                     .expediteur("Zineb")
                     .statut(StatusLivraison.PREPARED)
                     .poids(4.9)
