@@ -22,31 +22,26 @@ public class ColisLocationService {
      * - position de départ = expéditeur
      * - destination = destinataire
      */
-    public ColisLocation initColis(
-            Long colisId,
-            double srcLat,
-            double srcLon,
-            double destLat,
-            double destLon
-    ) {
-        ColisLocation loc = new ColisLocation(
-                colisId,
-                srcLat,
-                srcLon,
-                destLat,
-                destLon
-        );
+    private static final Logger logger =
+            LoggerFactory.getLogger(ColisLocationService.class);
 
+    public ColisLocation initColis(Long colisId,
+                                   double srcLat,
+                                   double srcLon,
+                                   double destLat,
+                                   double destLon) {
+
+        ColisLocation loc = new ColisLocation(colisId, srcLat, srcLon, destLat, destLon);
         locations.put(colisId, loc);
 
-        logger.info("📦 Colis " + colisId + " initialisé");
-        logger.info("   ➜ Source      : " + srcLat + ", " + srcLon);
-        logger.info("   ➜ Destination : " + destLat + ", " + destLon);
+        logger.info("📦 Colis {} initialisé", colisId);
+        logger.info("➜ Source : {}, {}", srcLat, srcLon);
+        logger.info("➜ Destination : {}, {}", destLat, destLon);
 
         return loc;
     }
-    private static final Logger logger =
-            LoggerFactory.getLogger(ColisLocationService.class);
+
+
 
 
     /**
