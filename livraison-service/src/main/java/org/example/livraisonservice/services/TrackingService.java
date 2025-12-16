@@ -1,10 +1,12 @@
 package org.example.livraisonservice.services;
 
 import lombok.RequiredArgsConstructor;
+import org.example.colisservice.exceptions.ColisNotFoundException;
 import org.example.livraisonservice.entities.Colis;
 import org.example.livraisonservice.entities.ColisLocation;
 import org.example.livraisonservice.entities.Location;
 import org.example.livraisonservice.entities.TrackingResponse;
+import org.example.livraisonservice.exceptions.UnknownCityException;
 import org.example.livraisonservice.feign.ColisRestClient;
 import org.springframework.stereotype.Service;
 
@@ -46,7 +48,7 @@ public class TrackingService {
 
         Colis colis = colisRestClient.getColisById(colisId);
         if (colis == null) {
-            throw new RuntimeException("Impossible de charger le colis " + colisId);
+            throw new ColisNotFoundException(colisId);
         }
         ColisLocation loc = locationService.getLocation(colisId);
 
@@ -54,9 +56,7 @@ public class TrackingService {
         double[] dest = findCityCoordinates(colis.getDestinataire());
 
         if (dest == null) {
-            throw new RuntimeException(
-                    "Ville destinataire inconnue : " + colis.getDestinataire()
-            );
+            throw new UnknownCityException(colis.getDestinataire());
         }
 
         if (loc == null) {
@@ -87,14 +87,19 @@ public class TrackingService {
 
 
 
+    private static final double[] EMPTY_COORDINATES = new double[0];
+
     private double[] findCityCoordinates(String cityName) {
-        if (cityName == null) return null;
+        if (cityName == null || cityName.trim().isEmpty()) {
+            return EMPTY_COORDINATES;
+        }
 
         for (Map.Entry<String, double[]> e : CITY_COORDINATES.entrySet()) {
             if (e.getKey().equalsIgnoreCase(cityName.trim())) {
                 return e.getValue();
             }
         }
-        return null;
+        return EMPTY_COORDINATES;
     }
+
 }
