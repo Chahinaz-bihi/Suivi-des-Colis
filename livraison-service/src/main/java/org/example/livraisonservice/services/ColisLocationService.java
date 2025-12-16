@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import org.example.livraisonservice.feign.ColisRestClient;
 import java.util.HashMap;
 import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 @Service
 @RequiredArgsConstructor
@@ -36,12 +39,15 @@ public class ColisLocationService {
 
         locations.put(colisId, loc);
 
-        System.out.println("📦 Colis " + colisId + " initialisé");
-        System.out.println("   ➜ Source      : " + srcLat + ", " + srcLon);
-        System.out.println("   ➜ Destination : " + destLat + ", " + destLon);
+        logger.info("📦 Colis " + colisId + " initialisé");
+        logger.info("   ➜ Source      : " + srcLat + ", " + srcLon);
+        logger.info("   ➜ Destination : " + destLat + ", " + destLon);
 
         return loc;
     }
+    private static final Logger logger =
+            LoggerFactory.getLogger(ColisLocationService.class);
+
 
     /**
      * Déplacement progressif vers la destination
@@ -78,14 +84,14 @@ public class ColisLocationService {
             loc.setLongitude(destLon);
             arrived = true;
             colis.setStatut(StatusLivraison.DELIVERED); // Colis arrivé
-            System.out.println("✅ Colis " + colisId + " arrivé à destination");
+            logger.info("✅ Colis " + colisId + " arrivé à destination");
         } else {
             loc.setLatitude(newLat);
             loc.setLongitude(newLon);
             if (colis.getStatut() == StatusLivraison.PREPARED) {
                 colis.setStatut(StatusLivraison.OUT_FOR_DELIVERY); // En cours de livraison
             }
-            System.out.println("🚚 Colis " + colisId + " en déplacement → "
+            logger.info("🚚 Colis " + colisId + " en déplacement → "
                     + String.format("%.5f", newLat) + ", "
                     + String.format("%.5f", newLon));
         }

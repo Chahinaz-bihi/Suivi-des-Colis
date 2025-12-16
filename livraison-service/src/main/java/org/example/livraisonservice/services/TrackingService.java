@@ -25,8 +25,8 @@ public class TrackingService {
     private final ColisLocationService locationService;
 
     // Coordonnées des villes marocaines
-    public static final Map<String, double[]> CITY_COORDINATES = new HashMap<>() {{
-        put("Casablanca", new double[]{33.5731, -7.5898});
+    protected static final Map<String, double[]> CITY_COORDINATES = new HashMap<>() {{
+        put(STORE_CITY, new double[]{STORE_LAT, STORE_LON});
         put("Rabat", new double[]{34.0209, -6.8416});
         put("Marrakech", new double[]{31.7917, -7.0926});
         put("Fès", new double[]{34.0531, -4.9998});
